@@ -26,30 +26,31 @@ class ChatGPT:
         self.model = os.getenv("OPENAI_MODEL", default = "gpt-3.5-turbo")
 
         # 其他可控参数
-        self.temperature = float(os.getenv("OPENAI_TEMPERATURE", default = 0))
+        self.temperature = float(os.getenv("OPENAI_TEMPERATURE", default = 0.5))
         self.frequency_penalty = float(os.getenv("OPENAI_FREQUENCY_PENALTY", default = 0))
         self.presence_penalty = float(os.getenv("OPENAI_PRESENCE_PENALTY", default = 0.6))
         self.max_tokens = int(os.getenv("OPENAI_MAX_TOKENS", default = 500))
-        self.role_user_name = os.getenv("OPENAI_ROLE_USER", default = "user")
-        self.role_assistant_name = os.getenv("OPENAI_ROLE_ASSISTANT", default = "assistant")
+        self.role_system = os.getenv("OPENAI_ROLE_SYSTEM", default = "Your are a smart assistant")
+        self.memory = int(os.getenv("OPENAI_MAX_MEMORY", default = 10))
 
 
 
     def get_response(self, user_input):
-        conversation.append({"role": self.role_user_name, "content": user_input})
-        
+        #一旦超过memory长度（n次对话），则清空conversation，只保留system
+        if len(conversation) >= self.memory:
+            conversation = [{"role": "system", "content": self.role_system}]
 
+        conversation.append({"role": "user", "content": user_input})
+        
         response = openai.ChatCompletion.create(
 	            model=self.model,
                 messages = self.messages
                 )
 
-        conversation.append({"role": self.role_assistant_name, "content": response['choices'][0]['message']['content']})
+        conversation.append({"role": "assistant", "content": response['choices'][0]['message']['content']})
         
         print("AI回答內容：")        
         print(response['choices'][0]['message']['content'].strip())
-
-
         
         return response['choices'][0]['message']['content'].strip()
 	
@@ -92,7 +93,7 @@ def webhook_handler():
         # Update dispatcher process that handler to process this message
         dispatcher.process_update(update)
     return 'ok'
-
+      
 
 def reply_handler(bot, update):
     """Reply message."""
