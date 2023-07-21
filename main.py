@@ -12,16 +12,11 @@ from telegram.ext import Dispatcher, MessageHandler, Filters
 import openai
 	
 openai.api_key = os.getenv("OPENAI_API_KEY") 
-
 chat_language = os.getenv("INIT_LANGUAGE", default = "zh") #amend here to change your preset language
-	
 conversation = [{"role": "system", "content": os.getenv("OPENAI_ROLE_SYSTEM", default = "Your are a smart assistant")}]
 
 class ChatGPT:  
-    
-
-    def __init__(self):
-        
+    def __init__(self):  
         self.messages = conversation
         self.model = os.getenv("OPENAI_MODEL", default = "gpt-3.5-turbo")
 
@@ -31,13 +26,13 @@ class ChatGPT:
         self.presence_penalty = float(os.getenv("OPENAI_PRESENCE_PENALTY", default = 0.6))
         self.max_tokens = int(os.getenv("OPENAI_MAX_TOKENS", default = 500))
         self.role_system = os.getenv("OPENAI_ROLE_SYSTEM", default = "Your are a smart assistant")
-        self.memory = int(os.getenv("OPENAI_MAX_MEMORY", default = 10))
+        self.memory = int(os.getenv("OPENAI_MEMORY", default = 10))
 
 
 
     def get_response(self, user_input):
         #一旦超过memory长度（n次对话），则清空conversation，只保留system
-        if len(conversation) >= self.memory:
+        if len(self.messages) >= self.memory:
             conversation = [{"role": "system", "content": self.role_system}]
 
         conversation.append({"role": "user", "content": user_input})
