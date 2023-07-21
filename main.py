@@ -15,7 +15,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 chat_language = os.getenv("INIT_LANGUAGE", default = "zh") #amend here to change your preset language
 	
-conversation = []
+conversation = [{"role": "system", "content": os.getenv("OPENAI_ROLE_SYSTEM", default = "Your are a smart assistant")}]
 
 class ChatGPT:  
     
@@ -25,19 +25,26 @@ class ChatGPT:
         self.messages = conversation
         self.model = os.getenv("OPENAI_MODEL", default = "gpt-3.5-turbo")
 
+        # 其他可控参数
+        self.temperature = float(os.getenv("OPENAI_TEMPERATURE", default = 0))
+        self.frequency_penalty = float(os.getenv("OPENAI_FREQUENCY_PENALTY", default = 0))
+        self.presence_penalty = float(os.getenv("OPENAI_PRESENCE_PENALTY", default = 0.6))
+        self.max_tokens = int(os.getenv("OPENAI_MAX_TOKENS", default = 500))
+        self.role_user_name = os.getenv("OPENAI_ROLE_USER", default = "user")
+        self.role_assistant_name = os.getenv("OPENAI_ROLE_ASSISTANT", default = "assistant")
+
 
 
     def get_response(self, user_input):
-        conversation.append({"role": "user", "content": user_input})
+        conversation.append({"role": self.role_user_name, "content": user_input})
         
 
         response = openai.ChatCompletion.create(
 	            model=self.model,
                 messages = self.messages
-
                 )
 
-        conversation.append({"role": "assistant", "content": response['choices'][0]['message']['content']})
+        conversation.append({"role": self.role_assistant_name, "content": response['choices'][0]['message']['content']})
         
         print("AI回答內容：")        
         print(response['choices'][0]['message']['content'].strip())

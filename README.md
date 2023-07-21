@@ -5,45 +5,8 @@
   <img src="demo/demo_351.png" width="500"/>
 </div>
 
-## [TelegramBot Vercel GPT3版本部屬](https://github.com/pyfbsdk59/Flask-ChatGPT-TelegramBot-Vercel)
-
-<div align="center">
-  <img src="demo/demo_3.png" width="700"/>
-</div>
-
-## [TelegramBot Render GPT3版本部屬](https://github.com/pyfbsdk59/Flask-ChatGPT-TelegramBot-Render)
-
-<div align="center">
-  <img src="demo/link.png" width="700"/>
-</div>
-
-## [LineBot Django Vercel GPT3版本部屬](https://github.com/pyfbsdk59/Django-ChatGPT-linebot-Vercel)
-
-<div align="center">
-  <img src="demo/link2.png" width="700"/>
-</div>
-
-## [TelegramBot Golang Render GPT3版本部屬](https://github.com/pyfbsdk59/Golang-ChatGPT-TelegramBot-Render)
-
-<div align="center">
-  <img src="demo/link3.png" width="700"/>
-</div>
-
-<div align="center">
-  <img src="demo/link3a.png" width="600"/>
-</div>
-
-## [LineBot Golang Render GPT3版本部屬](https://github.com/pyfbsdk59/Golang-ChatGPT-linebot-Render)
-
-<div align="center">
-  <img src="demo/link4.png" width="700"/>
-</div>
-
 ### [English](https://github.com/pyfbsdk59/Flask-ChatGPT-TelegramBot-Vercel/blob/main/README_en.md)
 ### [日本語](https://github.com/pyfbsdk59/Flask-ChatGPT-TelegramBot-Vercel/blob/main/README_jp.md)
-
-
-
 
 #### 0. 程式猿影音教學參考。請支持且訂閱加按讚感謝他的辛勞。（GPT3版本）
 
