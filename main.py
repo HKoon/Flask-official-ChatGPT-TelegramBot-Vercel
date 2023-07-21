@@ -32,8 +32,9 @@ class ChatGPT:
 
     def get_response(self, user_input):
         #一旦超过memory长度（n次对话），则清空conversation，只保留system
-        if len(self.messages) >= self.memory:
-            conversation = [{"role": "system", "content": self.role_system}]
+        if len(conversation) >= self.memory:
+            conversation.clear()
+            conversation.append({"role": "system", "content": os.getenv("OPENAI_ROLE_SYSTEM", default = "Your are a smart assistant")})
 
         conversation.append({"role": "user", "content": user_input})
         
